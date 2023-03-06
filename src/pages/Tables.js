@@ -62,26 +62,21 @@ const formProps = {
 // table code start
 const columns = [
   {
-    title: "AUTHOR",
-    dataIndex: "name",
-    key: "name",
+    title: "SR No",
+    dataIndex: "sr_no",
+    key: "sr_no",
     width: "32%",
   },
   {
-    title: "FUNCTION",
-    dataIndex: "function",
-    key: "function",
+    title: "Logistics Buyer NP Name",
+    dataIndex: "bap_id",
+    key: "bap_id",
   },
 
   {
-    title: "STATUS",
-    key: "status",
-    dataIndex: "status",
-  },
-  {
-    title: "EMPLOYED",
-    key: "employed",
-    dataIndex: "employed",
+    title: "Logistics Seller NP Name",
+    key: "seller_np",
+    dataIndex: "seller_np",
   },
 ];
 
@@ -617,7 +612,7 @@ function Tables() {
               </div>
             </Card>
 
-            <Card
+            {/* <Card
               bordered={false}
               className="criclebox tablespace mb-24"
               title="Projects Table"
@@ -650,7 +645,7 @@ function Tables() {
                   </Button>
                 </Upload>
               </div>
-            </Card>
+            </Card> */}
           </Col>
         </Row>
       </div>

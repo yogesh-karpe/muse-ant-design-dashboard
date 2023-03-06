@@ -1345,6 +1345,7 @@ span.ismobile {
   .ant-row {
     margin-left: -12px;
     margin-right: -12px;
+    align-items: center;
   }
   span.ismobile {
     display: inline-block;

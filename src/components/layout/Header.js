@@ -275,7 +275,7 @@ function Header({
       </div>
       <Row gutter={[24, 0]}>
         <Col span={24} md={6}>
-          <Breadcrumb>
+          {/* <Breadcrumb>
             <Breadcrumb.Item>
               <NavLink to="/">Pages</NavLink>
             </Breadcrumb.Item>
@@ -290,10 +290,10 @@ function Header({
             >
               {subName.replace("/", "")}
             </span>
-          </div>
+          </div> */}
         </Col>
         <Col span={24} md={18} className="header-control">
-          <Badge size="small" count={4}>
+          {/* <Badge size="small" count={4}>
             <Dropdown overlay={menu} trigger={["click"]}>
               <a
                 href="#pablo"
@@ -303,7 +303,7 @@ function Header({
                 {bell}
               </a>
             </Dropdown>
-          </Badge>
+          </Badge> */}
           <Button type="link" onClick={showDrawer}>
             {logsetting}
           </Button>
@@ -392,7 +392,7 @@ function Header({
                     </Button>
                   </ButtonContainer>
                 </div>
-                <div className="fixed-nav mb-2">
+                {/* <div className="fixed-nav mb-2">
                   <Title level={5}>Navbar Fixed </Title>
                   <Switch onChange={(e) => handleFixedNavbar(e)} />
                 </div>
@@ -417,19 +417,19 @@ function Header({
                     <Button type="black">{<TwitterOutlined />}TWEET</Button>
                     <Button type="black">{<FacebookFilled />}SHARE</Button>
                   </ButtonContainer>
-                </div>
+                </div> */}
               </div>
             </div>
           </Drawer>
           <Link to="/sign-in" className="btn-sign-in">
             {profile}
-            <span>Sign in</span>
+            <span>Sign Out</span>
           </Link>
-          <Input
+          {/* <Input
             className="header-search"
             placeholder="Type here..."
             prefix={<SearchOutlined />}
-          />
+          /> */}
         </Col>
       </Row>
     </>

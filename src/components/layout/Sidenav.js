@@ -163,8 +163,8 @@ function Sidenav({ color }) {
   return (
     <>
       <div className="brand">
-        <img src={logo} alt="" />
-        <span>Muse Dashboard</span>
+        <img style={{ paddingLeft: "20px"}} src={logo} alt="" />
+        {/* <span>Muse Dashboard</span> */}
       </div>
       <hr />
       <Menu theme="light" mode="inline">
@@ -207,7 +207,7 @@ function Sidenav({ color }) {
             <span className="label">Billing</span>
           </NavLink>
         </Menu.Item>
-        <Menu.Item key="4">
+        {/* <Menu.Item key="4">
           <NavLink to="/rtl">
             <span
               className="icon"
@@ -219,8 +219,8 @@ function Sidenav({ color }) {
             </span>
             <span className="label">RTL</span>
           </NavLink>
-        </Menu.Item>
-        <Menu.Item className="menu-item-header" key="5">
+        </Menu.Item> */}
+        {/* <Menu.Item className="menu-item-header" key="5">
           Account Pages
         </Menu.Item>
         <Menu.Item key="6">
@@ -247,9 +247,9 @@ function Sidenav({ color }) {
             <span className="icon">{signup}</span>
             <span className="label">Sign Up</span>
           </NavLink>
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
-      <div className="aside-footer">
+      {/* <div className="aside-footer">
         <div
           className="footer-box"
           style={{
@@ -265,7 +265,7 @@ function Sidenav({ color }) {
             DOCUMENTATION
           </Button>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
