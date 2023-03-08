@@ -9,8 +9,8 @@
 =========================================================
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import React, { Component } from "react";
-import { Link, useNavigate  } from "react-router-dom";
+import React, { Component, useState } from "react";
+import { Link, useHistory  } from "react-router-dom";
 import axios from 'axios'; 
 import {
   Layout,
@@ -115,11 +115,15 @@ const signin = [
     />
   </svg>,
 ];
-export default class SignIn extends Component {
-  render() {
+function SignIn() {
     // const navigate = useNavigate();
+    let [showWarning, setWarning] = useState(false)
+    let [showError, setError] = useState(false)
+    const history = useHistory();
     const onFinish = (values) => {
       console.log("Success:", values);
+      setWarning(false);
+      setError(false);
       const requestBody = {email: values.email , password: values.password};
 						const headers = {
 							'Content-Type': 'application/json'
@@ -130,17 +134,19 @@ export default class SignIn extends Component {
 							localStorage.setItem("userData", JSON.stringify({isLoggedIn : true}))
 							console.log("Logged In")
               // navigate("/dashboard");
-              // history.push('/dashboard')
+              history.push('/dashboard')
 							// this.$router.push('/');
 							}
 							else{
+                setWarning(true)
 								// this.showWarning = true;
 								// this.email = null;  //not working currently
 								// this.password = null;			
 							}
 						}).catch((error) =>{
 							console.log("Error is", error);
-							// this.showErr = true;
+							setError(true);
+              // this.showErr = true;
 						})
     };
 
@@ -228,7 +234,8 @@ export default class SignIn extends Component {
                       },
                     ]}
                   >
-                    <Input placeholder="Password" />
+                    {/* <Input placeholder="Password" /> */}
+                    <Input.Password placeholder="Password"/>
                   </Form.Item>
 
                   {/* <Form.Item
@@ -249,6 +256,15 @@ export default class SignIn extends Component {
                       SIGN IN
                     </Button>
                   </Form.Item>
+                  <div>
+                    {showWarning &&  <label  style={{color: "red"}}>Please Enter Valid Credentials</label>}
+                  </div>
+
+                  <div>
+                    {showError &&  <label style={{color: "red"}}>failed to send request</label>}
+                  </div>
+
+                  {/* v-if="showErr"  */}
                   {/* <p className="font-semibold text-muted">
                     Don't have an account?{" "}
                     <Link to="/sign-up" className="text-dark font-bold">
@@ -312,4 +328,5 @@ export default class SignIn extends Component {
       </>
     );
   }
-}
+
+  export default SignIn;

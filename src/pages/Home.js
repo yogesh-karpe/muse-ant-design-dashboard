@@ -56,9 +56,9 @@ function Home() {
   let [reverse, setReverse] = useState(false);
   
   let [bapCount, setBAPCount] = useState(0);
-  let [totalOrderCount, setTotalOrdersCount] = useState(0);
-  let [acceptedOrderCount, setAcceptedOrdersCount] = useState(0);
-  let [customerIssueCount, setCustomerIssuesCount] = useState(0);
+  let [totalOrdersCount, setTotalOrdersCount] = useState(0);
+  let [acceptedOrdersCount, setAcceptedOrdersCount] = useState(0);
+  let [customerIssuesCount, setCustomerIssuesCount] = useState(0);
 
   const totalOrders = [
     <svg 
@@ -116,12 +116,11 @@ function Home() {
     </svg>,
   ];
   const editIcon = [
-    <svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M9 6C9 7.65685 7.65685 9 6 9C4.34315 9 3 7.65685 3 6C3 4.34315 4.34315 3 6 3C7.65685 3 9 4.34315 9 6Z" fill="#fff"/>
-      <path d="M17 6C17 7.65685 15.6569 9 14 9C12.3431 9 11 7.65685 11 6C11 4.34315 12.3431 3 14 3C15.6569 3 17 4.34315 17 6Z" fill="#fff"/>
-      <path d="M12.9291 17C12.9758 16.6734 13 16.3395 13 16C13 14.3648 12.4393 12.8606 11.4998 11.6691C12.2352 11.2435 13.0892 11 14 11C16.7614 11 19 13.2386 19 16V17H12.9291Z" fill="#fff"/>
-      <path d="M6 11C8.76142 11 11 13.2386 11 16V17H1V16C1 13.2386 3.23858 11 6 11Z" fill="#fff"/>
-    </svg>
+    <svg enable-background="new 0 0 19 19" height="19px" id="Layer_1" version="1.1" viewBox="0 0 19 19" width="19px" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"><g>
+      <path d="M8.44,7.25C8.348,7.342,8.277,7.447,8.215,7.557L8.174,7.516L8.149,7.69   C8.049,7.925,8.014,8.183,8.042,8.442l-0.399,2.796l2.797-0.399c0.259,0.028,0.517-0.007,0.752-0.107l0.174-0.024l-0.041-0.041   c0.109-0.062,0.215-0.133,0.307-0.225l5.053-5.053l-3.191-3.191L8.44,7.25z" fill="#fff"/>
+      <path d="M18.183,1.568l-0.87-0.87c-0.641-0.641-1.637-0.684-2.225-0.097l-0.797,0.797l3.191,3.191l0.797-0.798   C18.867,3.205,18.824,2.209,18.183,1.568z" fill="#fff"/>
+      <path d="M15,9.696V17H2V2h8.953l1.523-1.42c0.162-0.161,0.353-0.221,0.555-0.293   c0.043-0.119,0.104-0.18,0.176-0.287H0v19h17V7.928L15,9.696z" fill="#fff"/>
+    </g></svg>
   ];
   const cart = [
     <svg
@@ -143,22 +142,22 @@ function Home() {
   const count = [
     {
       today: "Total Order's",
-      title: "$53,000",
+      title: totalOrdersCount,
       icon: totalOrders,
     },
     {
       today: "Accepted Orders",
-      title: "3,200",
+      title: acceptedOrdersCount,
       icon: heart,
     },
     {
       today: "Total BAP's",
-      title: "+1,200",
+      title: bapCount,
       icon: profile,
     },
     {
       today: "Customer Issues",
-      title: "$13,200",
+      title: customerIssuesCount,
       persent: "10%",
       icon: editIcon,
     },
@@ -206,15 +205,10 @@ function Home() {
       const responses = await Promise.all([getBAPCount(), getTotalOrdersCount(), getAcceptedOrdersCount(), getCustomerIssuesCount()]);
 
       console.log("**Dashboard**",responses)
-      
-      this.bap_count = responses[0].data.results[0].bap_count;
-      this.total_orders_count = responses[1].data.results[0].total_orders_count;
-      this.accepted_orders_count = responses[2].data.results[0].accepted_orders_count;
-      this.customer_issues_count = responses[3].data.results[0].customer_issues_count;
-
-      // console.log("bap_count", this.bap_count)
-      // console.log("total_orders_count", this.total_orders_count)
-      // console.log("accepted_orders_count", this.accepted_orders_count)
+      setBAPCount(responses[0].data.results[0].bap_count);
+      setTotalOrdersCount(responses[1].data.results[0].total_orders_count);
+      setAcceptedOrdersCount(responses[2].data.results[0].accepted_orders_count);
+      setCustomerIssuesCount(responses[3].data.results[0].customer_issues_count);
       // return result;
           
     }catch(error) {
