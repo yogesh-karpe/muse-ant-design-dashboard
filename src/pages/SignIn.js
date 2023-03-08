@@ -10,7 +10,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 import React, { Component } from "react";
-import { Link, useNavigate, Switch  } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import axios from 'axios'; 
 import {
   Layout,
@@ -117,7 +117,7 @@ const signin = [
 ];
 export default class SignIn extends Component {
   render() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const onFinish = (values) => {
       console.log("Success:", values);
       const requestBody = {email: values.email , password: values.password};
@@ -129,7 +129,7 @@ export default class SignIn extends Component {
 							if(res.data.res){
 							localStorage.setItem("userData", JSON.stringify({isLoggedIn : true}))
 							console.log("Logged In")
-              navigate("/dashboard");
+              // navigate("/dashboard");
               // history.push('/dashboard')
 							// this.$router.push('/');
 							}
