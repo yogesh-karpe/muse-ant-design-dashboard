@@ -135,11 +135,9 @@ function SignIn() {
 							console.log("Logged In")
               // navigate("/dashboard");
               history.push('/dashboard')
-							// this.$router.push('/');
 							}
 							else{
                 setWarning(true)
-								// this.showWarning = true;
 								// this.email = null;  //not working currently
 								// this.password = null;			
 							}

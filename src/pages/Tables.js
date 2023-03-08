@@ -182,11 +182,11 @@ function Tables() {
 				// this.records = res.data.records.results;
         console.log(res.data.records.results)
         let records = res.data.records.results;
-        setRecords = ({records})
+        setRecords(res.data.records.results);
 				console.log("records is", records)
         console.log("data is", data)
         let count = res.data.count;
-        setCount = ({count})
+        setCount(count)
 				console.log("count is", setCount)
 				// this.tablePagination.total = this.count;
 				// this.isDataFetched = true;
