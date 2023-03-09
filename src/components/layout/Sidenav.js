@@ -182,7 +182,7 @@ function Sidenav({ color }) {
           </NavLink>
         </Menu.Item>
         <Menu.Item key="2">
-          <NavLink to="/tables">
+          <NavLink to="/order-status">
             <span
               className="icon"
               style={{
@@ -191,11 +191,11 @@ function Sidenav({ color }) {
             >
               {tables}
             </span>
-            <span className="label">Tables</span>
+            <span className="label">Order Status</span>
           </NavLink>
         </Menu.Item>
         <Menu.Item key="3">
-          <NavLink to="/billing">
+          <NavLink to="/customer-support">
             <span
               className="icon"
               style={{
@@ -204,7 +204,7 @@ function Sidenav({ color }) {
             >
               {billing}
             </span>
-            <span className="label">Billing</span>
+            <span className="label">Customer Support</span>
           </NavLink>
         </Menu.Item>
         {/* <Menu.Item key="4">

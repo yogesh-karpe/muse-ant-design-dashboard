@@ -60,17 +60,92 @@ const columns = [
     dataIndex: "bap_id",
     key: "bap_id",
   },
+  {
+    title: "Logistics Seller NP Name",
+    key: "seller_np",
+    dataIndex: "seller_np",
+  },
+  {
+    title: "Order Create Date & Time",
+    key: "consignment_creation_time",
+    dataIndex: "consignment_creation_time",
+  },
+  {
+    title: "Network Order Id",
+    key: "ondc_order_id",
+    dataIndex: "ondc_order_id",
+  },
+  {
+    title: "Network Transaction Id",
+    key: "transaction_id",
+    dataIndex: "transaction_id",
+  },
+  {
+    title: "Logistics Seller NP Order Id",
+    key: "",
+    dataIndex: "",
+  },
+  {
+    title: "Order Status",
+    key: "ondc_order_state",
+    dataIndex: "ondc_order_state",
+  },
+  {
+    title: "Name of Seller",
+    key: "provider_name",
+    dataIndex: "provider_name",
+  },
+  {
+    title: "Order Pickup Date & Time",
+    key: "pickup_time",
+    dataIndex: "pickup_time",
+  },
+  {
+    title: "Pickup Pincode",
+    key: "pickup_areacode",
+    dataIndex: "pickup_areacode",
+  },
+  {
+    title: "Shipped At Date & Time",
+    key: "shipped_time",
+    dataIndex: "shipped_time",
+  },
+  {
+    title: "Delivered At Date & Time",
+    key: "delivery_time",
+    dataIndex: "delivery_time",
+  },
+  {
+    title: "Delivery City",
+    key: "drop_city",
+    dataIndex: "drop_city",
+  },
+  {
+    title: "Delivery Pincode",
+    key: "drop_areacode",
+    dataIndex: "drop_areacode",
+  },
+  {
+    title: "Cancelled At Date & Time",
+    key: "cancellation_time",
+    dataIndex: "cancellation_time",
+  },
+  {
+    title: "Cancelled By",
+    key: "cancelled_by",
+    dataIndex: "cancelled_by",
+  },
+  {
+    title: "Cancellation Reason",
+    key: "cancellation_reason_code",
+    dataIndex: "cancellation_reason_code",
+  },
+  {
+    title: "Shipping Charges",
+    key: "delivery_charge",
+    dataIndex: "delivery_charge",
+  },
 
-  {
-    title: "STATUS",
-    key: "status",
-    dataIndex: "status",
-  },
-  {
-    title: "EMPLOYED",
-    key: "employed",
-    dataIndex: "employed",
-  },
 ];
 
 const data = [
@@ -159,19 +234,19 @@ const data = [
   },
 ];
 
-function Tables() {
+function OrderStatus() {
   let [records, setRecords]=useState(null);
   let [count, setCount]=useState(0);
 
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
   useEffect(() => {
     console.log("inside useEffect")
-    updateRecords(1, 10, "2023-02-06 03:22:49", "2023-03-06 03:22:49")
+    getRecords(1, 10, "2023-02-06 03:22:49", "2023-03-06 03:22:49")
   }, []);
 
-  function updateRecords(p, n, fromDate, toDate){
+  function getRecords(p, n, fromDate, toDate){
       // console.log("p n ", p, n)
-      console.log("Inside updateRecords", p, n, fromDate, toDate)
+      console.log("Inside getRecords", p, n, fromDate, toDate)
 			// this.isLoading = true;
 			// this.error = null;
 			const requestBody = { fromDate: fromDate, toDate: toDate };
@@ -206,7 +281,7 @@ function Tables() {
             <Card
               bordered={false}
               className="criclebox tablespace mb-24"
-              title="Authors Table"
+              // title="Authors Table"
               extra={
                 <>
                   <Radio.Group onChange={onChange} defaultValue="a">
@@ -232,4 +307,4 @@ function Tables() {
   );
 }
 
-export default Tables;
+export default OrderStatus;
