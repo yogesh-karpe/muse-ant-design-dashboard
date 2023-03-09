@@ -237,12 +237,31 @@ const data = [
 function OrderStatus() {
   let [records, setRecords]=useState(null);
   let [count, setCount]=useState(0);
+  let [tablePagination, setTablePagination]=useState({total: 10});
+  let [pagination, setPagination] = useState({current: 1,pageSize: 10});
+
+  const pageChangeHandler = (page) => {
+    console.log("Page is",page);
+    setPagination(page);
+    console.log("pagination is", pagination)
+    onSubmit(pagination.current, pagination.pageSize);
+  };
 
   const onChange = (e) => console.log(`radio checked:${e.target.value}`);
   useEffect(() => {
     console.log("inside useEffect")
-    getRecords(1, 10, "2023-02-06 03:22:49", "2023-03-06 03:22:49")
+    getRecords(1, 10, "2023-02-09 03:22:49", "2023-03-09 03:22:49")
+    onSubmit(pagination.current, pagination.pageSize);
   }, []);
+
+  function onSubmit(p,n){
+    // console.log("start date", this.startDate);
+    // console.log("end date", this.endDate);
+          p = pagination.current;
+          n= pagination.pageSize;
+      // getRecords(p, n, this.formatDate(this.startDate), this.formatDate(this.endDate))
+      getRecords(p, n, "2023-02-09 03:22:49", "2023-03-09 03:22:49")
+  }
 
   function getRecords(p, n, fromDate, toDate){
       // console.log("p n ", p, n)
@@ -262,7 +281,14 @@ function OrderStatus() {
         console.log("data is", data)
         let count = res.data.count;
         setCount(count)
+        let updatedValue = {total: count}
+
+        console.log("updated value", updatedValue)
 				console.log("count is", setCount)
+        setTablePagination(tablePagination =>({
+              ...updatedValue
+        }))
+        console.log("tablePagination", tablePagination)
 				// this.tablePagination.total = this.count;
 				// this.isDataFetched = true;
 				// this.isLoading = false;
@@ -295,7 +321,9 @@ function OrderStatus() {
                 <Table
                   columns={columns}
                   dataSource={records}
-                  pagination={false}
+                  pagination={tablePagination}
+                  total={count}
+                  onChange={pageChangeHandler}
                   className="ant-border-space"
                 />
               </div>
