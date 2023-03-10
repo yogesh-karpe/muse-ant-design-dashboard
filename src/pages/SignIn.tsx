@@ -30,9 +30,10 @@ import signinbg from "../assets/images/shipyaari-logo.png";
 //   InstagramOutlined,
 //   GithubOutlined,
 // } from "@ant-design/icons";
-function onChange(checked) {
-  console.log(`switch to ${checked}`);
-}
+
+// function onChange(checked: any) {
+//   console.log(`switch to ${checked}`);
+// }
 const { Title } = Typography;
 const { Header, Footer, Content } = Layout;
 // const template = [
@@ -120,7 +121,7 @@ function SignIn() {
     let [showWarning, setWarning] = useState(false)
     let [showError, setError] = useState(false)
     const history = useHistory();
-    const onFinish = (values) => {
+    const onFinish = (values: any) => {
       console.log("Success:", values);
       setWarning(false);
       setError(false);
@@ -148,7 +149,7 @@ function SignIn() {
 						})
     };
 
-    const onFinishFailed = (errorInfo) => {
+    const onFinishFailed = (errorInfo: any) => {
       console.log("Failed:", errorInfo);
     };
     return (

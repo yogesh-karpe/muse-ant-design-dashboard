@@ -9,7 +9,7 @@
   =========================================================
   * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios'; 
 
 import {
@@ -51,9 +51,9 @@ import card from "../assets/images/info-card-1.jpg";
 function Dashboard() {
   const { Title, Text } = Typography;
 
-  const onChange = (e) => console.log(`radio checked:${e.target.value}`);
+  // const onChange = (e) => console.log(`radio checked:${e.target.value}`);
 
-  let [reverse, setReverse] = useState(false);
+  let [reverse, setReverse] = useState(null);
   
   let [bapCount, setBAPCount] = useState(0);
   let [totalOrdersCount, setTotalOrdersCount] = useState(0);
@@ -171,7 +171,7 @@ function Dashboard() {
     headers: {
       authorization: "authorization-text",
     },
-    onChange(info) {
+    onChange(info: any) {
       if (info.file.status !== "uploading") {
         console.log(info.file, info.fileList);
       }
@@ -199,16 +199,18 @@ function Dashboard() {
     return axios.get('http://localhost:5003/api/getCustomerIssuesCount')
   }
 
-  useEffect(async ()=>{
+  useEffect(()=>{
     try{
+      const getCountDetails = async () => {
+        const responses = await Promise.all([getBAPCount(), getTotalOrdersCount(), getAcceptedOrdersCount(), getCustomerIssuesCount()]);  
+        console.log("**Dashboard**",responses)
+        setBAPCount(responses[0].data.results[0].bap_count);
+        setTotalOrdersCount(responses[1].data.results[0].total_orders_count);
+        setAcceptedOrdersCount(responses[2].data.results[0].accepted_orders_count);
+        setCustomerIssuesCount(responses[3].data.results[0].customer_issues_count);
+      };
+      getCountDetails();
       console.log("useEffect Here")
-      const responses = await Promise.all([getBAPCount(), getTotalOrdersCount(), getAcceptedOrdersCount(), getCustomerIssuesCount()]);
-
-      console.log("**Dashboard**",responses)
-      setBAPCount(responses[0].data.results[0].bap_count);
-      setTotalOrdersCount(responses[1].data.results[0].total_orders_count);
-      setAcceptedOrdersCount(responses[2].data.results[0].accepted_orders_count);
-      setCustomerIssuesCount(responses[3].data.results[0].customer_issues_count);
       // return result;
           
     }catch(error) {
@@ -237,7 +239,8 @@ function Dashboard() {
                     <Col xs={18}>
                       <span>{c.today}</span>
                       <Title level={3}>
-                        {c.title} <small className={c.bnb}>{c.persent}</small>
+                        {c.title} <small>{c.persent}</small>
+                        {/* className={c.bnb} */}
                       </Title>
                     </Col>
                     <Col xs={6}>

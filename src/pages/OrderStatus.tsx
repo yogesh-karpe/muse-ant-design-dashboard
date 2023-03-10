@@ -21,9 +21,12 @@ import {
   Button,
   Avatar,
   Typography,
+  Space,
+  Tag
 } from "antd";
 
-import { React, useState, useEffect } from "react";
+import React, {useState, useEffect } from "react";
+import type { ColumnsType } from 'antd/es/table';
 import axios from 'axios'; 
 import { ToTopOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -36,7 +39,7 @@ const formProps = {
   headers: {
     authorization: "authorization-text",
   },
-  onChange(info) {
+  onChange(info: any) {
     if (info.file.status !== "uploading") {
       console.log(info.file, info.fileList);
     }
@@ -47,6 +50,15 @@ const formProps = {
     }
   },
 };
+
+interface DataType {
+  key: string;
+  name: string;
+  age: number;
+  address: string;
+  tags: string[];
+}
+
 // table code start
 const columns = [
   {
@@ -235,26 +247,32 @@ const data = [
 ];
 
 function OrderStatus() {
-  let [records, setRecords]=useState(null);
-  let [count, setCount]=useState(0);
+  let [records, setRecords]=useState();
+  //null
+  let [count, setCount]=useState();
   let [tablePagination, setTablePagination]=useState({total: 10});
   let [pagination, setPagination] = useState({current: 1,pageSize: 10});
 
-  const pageChangeHandler = (page) => {
+  // type Page ={
+  //   current: number,
+  //   pageSize: number
+  // }
+
+  const pageChangeHandler = (page: any) => {
     console.log("Page is",page);
     setPagination(page);
     console.log("pagination is", pagination)
     onSubmit(pagination.current, pagination.pageSize);
   };
 
-  const onChange = (e) => console.log(`radio checked:${e.target.value}`);
+  // const onChange = (e) => console.log(`radio checked:${e.target.value}`);
   useEffect(() => {
     console.log("inside useEffect")
     getRecords(1, 10, "2023-02-09 03:22:49", "2023-03-09 03:22:49")
     onSubmit(pagination.current, pagination.pageSize);
   }, []);
 
-  function onSubmit(p,n){
+  function onSubmit(p: number,n: number){
     // console.log("start date", this.startDate);
     // console.log("end date", this.endDate);
           p = pagination.current;
@@ -263,7 +281,8 @@ function OrderStatus() {
       getRecords(p, n, "2023-02-09 03:22:49", "2023-03-09 03:22:49")
   }
 
-  function getRecords(p, n, fromDate, toDate){
+  //can convert String type to Date type
+  function getRecords(p: number, n: number, fromDate: string, toDate: string){
       // console.log("p n ", p, n)
       console.log("Inside getRecords", p, n, fromDate, toDate)
 			// this.isLoading = true;
@@ -308,23 +327,23 @@ function OrderStatus() {
               bordered={false}
               className="criclebox tablespace mb-24"
               // title="Authors Table"
-              extra={
-                <>
-                  <Radio.Group onChange={onChange} defaultValue="a">
-                    <Radio.Button value="a">All</Radio.Button>
-                    <Radio.Button value="b">Accepted</Radio.Button>
-                  </Radio.Group>
-                </>
-              }
+              // extra={
+              //   <>
+              //     <Radio.Group onChange={onChange} defaultValue="a">
+              //       <Radio.Button value="a">All</Radio.Button>
+              //       <Radio.Button value="b">Accepted</Radio.Button>
+              //     </Radio.Group>
+              //   </>
+              // }
             >
               <div className="table-responsive">
                 <Table
                   columns={columns}
                   dataSource={records}
                   pagination={tablePagination}
-                  total={count}
                   onChange={pageChangeHandler}
                   className="ant-border-space"
+                  // total={count}
                 />
               </div>
             </Card>
