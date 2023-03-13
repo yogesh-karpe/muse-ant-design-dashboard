@@ -268,6 +268,8 @@ function Header({
   const showDrawer = () => setVisible(true);
   const hideDrawer = () => setVisible(false);
 
+  const clearLocalStorage = () => localStorage.clear();
+
   return (
     <>
       {/* <div className="setting-drwer" onClick={showDrawer}>
@@ -421,7 +423,7 @@ function Header({
               </div>
             </div>
           </Drawer>
-          <Link to="/sign-in" className="btn-sign-in">
+          <Link to="/sign-in" className="btn-sign-in" onClick={clearLocalStorage}>
             {profile}
             <span>Sign Out</span>
           </Link>

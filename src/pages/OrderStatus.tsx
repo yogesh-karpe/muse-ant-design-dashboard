@@ -37,15 +37,6 @@ import moment from "moment";
 
 const { Title } = Typography;
 
-
-interface DataType {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-  tags: string[];
-}
-
 // table code start
 const columns = [
   {
@@ -155,10 +146,6 @@ function OrderStatus() {
   let [pagination, setPagination] = useState({current: 1,pageSize: 10});
   let [startDate, setStartDate] = useState<Date>();
   let [endDate, setEndDate] = useState<Date>(new Date());
-  // type Page ={
-  //   current: number,
-  //   pageSize: number
-  // }
 
   const pageChangeHandler = (pagination: any) => {
     // console.log("Page is",page);
@@ -195,11 +182,7 @@ function OrderStatus() {
   function onSubmit(p: number,n: number){
     console.log("start date", startDate);
     console.log("end date", endDate);
-          // p = pagination.current;
-          // n= pagination.pageSize;
-      // getRecords(p, n, this.formatDate(this.startDate), this.formatDate(this.endDate))
       // getRecords(p, n, "2023-02-09 03:22:49", "2023-03-09 03:22:49")
-
       getRecords(p, n, formatDate(startDate), formatDate(endDate))
   }
 
@@ -218,8 +201,7 @@ function OrderStatus() {
         console.log(res.data.records.results)
         let records = res.data.records.results;
         setRecords(res.data.records.results);
-				console.log("records is", records)
-        // console.log("data is", data)
+				console.log("records are", records)
         let count = res.data.count;
         setCount(count)
         let updatedValue = {total: count}
@@ -299,11 +281,10 @@ function OrderStatus() {
                   onChange={toDateChangeHandler}/>  
               <div>
                   <Button type="primary" onClick={e => { e.stopPropagation(); onSubmit(1, 10)}}>Submit</Button>
-                  {/* onSubmit() */}
               </div> 
 
                   <Button onClick={e => { e.stopPropagation(); getCSVFile()}}>Download CSV</Button> 
-            </Space>
+            </Space>  <br/><br/>
 
               <div className="table-responsive">
                 <Table
