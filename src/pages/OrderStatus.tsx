@@ -21,15 +21,19 @@ import {
   Button,
   Avatar,
   Typography,
+  DatePicker,
   Space,
   Tag
 } from "antd";
+
+import type { DatePickerProps } from 'antd';
 
 import React, {useState, useEffect } from "react";
 import type { ColumnsType } from 'antd/es/table';
 import axios from 'axios'; 
 import { ToTopOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const { Title } = Typography;
 
@@ -252,7 +256,8 @@ function OrderStatus() {
   let [count, setCount]=useState();
   let [tablePagination, setTablePagination]=useState({total: 10});
   let [pagination, setPagination] = useState({current: 1,pageSize: 10});
-
+  let [startDate, setStartDate] = useState<Date>();
+  let [endDate, setEndDate] = useState<Date>(new Date());
   // type Page ={
   //   current: number,
   //   pageSize: number
@@ -265,6 +270,18 @@ function OrderStatus() {
     onSubmit(pagination.current, pagination.pageSize);
   };
 
+  const fromDateChangeHandler: DatePickerProps['onChange'] = (date, dateString) => {
+    let val = new Date(dateString);
+    console.log("start val", val)
+    setStartDate(val);
+  };
+
+  const toDateChangeHandler: DatePickerProps['onChange'] = (date, dateString) => {
+    let val = new Date(dateString);
+    console.log("end val", val)
+    setEndDate(val);
+  };
+
   // const onChange = (e) => console.log(`radio checked:${e.target.value}`);
   useEffect(() => {
     console.log("inside useEffect")
@@ -272,13 +289,21 @@ function OrderStatus() {
     onSubmit(pagination.current, pagination.pageSize);
   }, []);
 
+  function formatDate(value: any) {
+    console.log("formatDate", moment(String(value)).format('YYYY-MM-DD hh:mm:ss'))
+    return moment(String(value)).format('YYYY-MM-DD hh:mm:ss')
+    // dd-mm-yyyy hh:mm:ss
+  }
+
   function onSubmit(p: number,n: number){
-    // console.log("start date", this.startDate);
-    // console.log("end date", this.endDate);
+    console.log("start date", startDate);
+    console.log("end date", endDate);
           // p = pagination.current;
           // n= pagination.pageSize;
       // getRecords(p, n, this.formatDate(this.startDate), this.formatDate(this.endDate))
-      getRecords(p, n, "2023-02-09 03:22:49", "2023-03-09 03:22:49")
+      // getRecords(p, n, "2023-02-09 03:22:49", "2023-03-09 03:22:49")
+
+      getRecords(p, n, formatDate(startDate), formatDate(endDate))
   }
 
   //can convert String type to Date type
@@ -336,7 +361,25 @@ function OrderStatus() {
               //   </>
               // }
             >
-              <div className="table-responsive1">
+
+            <Space direction="horizontal">
+              <label>From Date</label>
+              <DatePicker 
+                  // defaultValue={(new Date(new Date().setMonth(new Date().getMonth() - 1))}
+                  allowClear={false} 
+                  onChange={fromDateChangeHandler} />
+              <label>To Date</label>
+              <DatePicker 
+                  // defaultValue={moment()}
+                  allowClear={false} 
+                  onChange={toDateChangeHandler}/>  
+              <div>
+                  <Button type="primary" onClick={e => { e.stopPropagation(); onSubmit(1, 10)}}>Submit</Button>
+                  {/* onSubmit() */}
+              </div>     
+            </Space>
+
+              <div className="table-responsive">
                 <Table
                   columns={columns}
                   dataSource={records}
