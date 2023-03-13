@@ -89,6 +89,7 @@ import {
       title: "Issue Details(Buyer Issue)",
       key: "buyer_issue",
       dataIndex: "buyer_issue",
+      width: "10%",
     },
     {
       title: "Issue Details(Seller Response)",

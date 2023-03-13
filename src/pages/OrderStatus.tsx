@@ -37,23 +37,6 @@ import moment from "moment";
 
 const { Title } = Typography;
 
-const formProps = {
-  name: "file",
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  headers: {
-    authorization: "authorization-text",
-  },
-  onChange(info: any) {
-    if (info.file.status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === "done") {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
 
 interface DataType {
   key: string;
@@ -161,94 +144,8 @@ const columns = [
     key: "delivery_charge",
     dataIndex: "delivery_charge",
   },
-
 ];
 
-const data = [
-  {
-    key: "1",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-          ></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>Michael John</Title>
-            <p>michael@mail.com</p>
-          </div>
-        </Avatar.Group>{" "}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>Manager</Title>
-          <p>Organization</p>
-        </div>
-      </>
-    ),
-
-    status: (
-      <>
-        <Button type="primary" className="tag-primary">
-          ONLINE
-        </Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>23/04/18</span>
-          <a href="#pablo">Edit</a>
-        </div>
-      </>
-    ),
-  },
-
-  {
-    key: "2",
-    name: (
-      <>
-        <Avatar.Group>
-          <Avatar
-            className="shape-avatar"
-            shape="square"
-            size={40}
-          ></Avatar>
-          <div className="avatar-info">
-            <Title level={5}>Alexa Liras</Title>
-            <p>alexa@mail.com</p>
-          </div>
-        </Avatar.Group>{" "}
-      </>
-    ),
-    function: (
-      <>
-        <div className="author-info">
-          <Title level={5}>Programator</Title>
-          <p>Developer</p>
-        </div>
-      </>
-    ),
-
-    status: (
-      <>
-        <Button className="tag-badge">ONLINE</Button>
-      </>
-    ),
-    employed: (
-      <>
-        <div className="ant-employed">
-          <span>23/12/20</span>
-          <a href="#pablo">Edit</a>
-        </div>
-      </>
-    ),
-  },
-];
 
 function OrderStatus() {
   let [records, setRecords]=useState();
@@ -322,13 +219,11 @@ function OrderStatus() {
         let records = res.data.records.results;
         setRecords(res.data.records.results);
 				console.log("records is", records)
-        console.log("data is", data)
+        // console.log("data is", data)
         let count = res.data.count;
         setCount(count)
         let updatedValue = {total: count}
-
         console.log("updated value", updatedValue)
-				console.log("count is", setCount)
         setTablePagination(tablePagination =>({
               ...updatedValue
         }))
@@ -341,8 +236,37 @@ function OrderStatus() {
 				// this.isLoading = false;
 				// this.error = "Failed to fetch data - please try again later"
 			})
-  };
-  
+  }
+
+  function getCSVFile() {
+    const requestBody = { fromDate: formatDate(startDate), toDate: formatDate(endDate) };
+    const headers = {
+      'Content-Type': 'application/json'
+    }
+    axios.post(`http://localhost:5003/api/getOrderStatusCSV`, requestBody, { headers: headers, data: requestBody }).then((res) => {
+      // console.log("res", res);
+      downloadCSVFile(res.data);
+    })
+  }
+
+  function downloadCSVFile(csv_data: any) {
+    let CSVFile = new Blob([csv_data], {
+      type: "text/csv"
+    });
+    var temp_link = document.createElement('a');
+
+    // Download csv file
+    temp_link.download = "Order_Status.csv";
+    var url = window.URL.createObjectURL(CSVFile);
+    temp_link.href = url;
+
+    temp_link.style.display = "none";
+    document.body.appendChild(temp_link);
+
+    temp_link.click();
+    document.body.removeChild(temp_link);
+  }
+
   return (
     <>
       <div className="tabled">
@@ -362,7 +286,7 @@ function OrderStatus() {
               // }
             >
 
-            <Space direction="horizontal">
+            <Space size="middle" direction="horizontal">
               <label>From Date</label>
               <DatePicker 
                   // defaultValue={(new Date(new Date().setMonth(new Date().getMonth() - 1))}
@@ -370,13 +294,15 @@ function OrderStatus() {
                   onChange={fromDateChangeHandler} />
               <label>To Date</label>
               <DatePicker 
-                  // defaultValue={moment()}
+                  defaultValue={moment()}
                   allowClear={false} 
                   onChange={toDateChangeHandler}/>  
               <div>
                   <Button type="primary" onClick={e => { e.stopPropagation(); onSubmit(1, 10)}}>Submit</Button>
                   {/* onSubmit() */}
-              </div>     
+              </div> 
+
+                  <Button onClick={e => { e.stopPropagation(); getCSVFile()}}>Download CSV</Button> 
             </Space>
 
               <div className="table-responsive">
