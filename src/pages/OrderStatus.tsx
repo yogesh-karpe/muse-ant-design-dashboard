@@ -258,9 +258,9 @@ function OrderStatus() {
   //   pageSize: number
   // }
 
-  const pageChangeHandler = (page: any) => {
-    console.log("Page is",page);
-    setPagination(page);
+  const pageChangeHandler = (pagination: any) => {
+    // console.log("Page is",page);
+    setPagination(pagination);
     console.log("pagination is", pagination)
     onSubmit(pagination.current, pagination.pageSize);
   };
@@ -268,15 +268,15 @@ function OrderStatus() {
   // const onChange = (e) => console.log(`radio checked:${e.target.value}`);
   useEffect(() => {
     console.log("inside useEffect")
-    getRecords(1, 10, "2023-02-09 03:22:49", "2023-03-09 03:22:49")
+    // getRecords(1, 10, "2023-02-09 03:22:49", "2023-03-09 03:22:49")
     onSubmit(pagination.current, pagination.pageSize);
   }, []);
 
   function onSubmit(p: number,n: number){
     // console.log("start date", this.startDate);
     // console.log("end date", this.endDate);
-          p = pagination.current;
-          n= pagination.pageSize;
+          // p = pagination.current;
+          // n= pagination.pageSize;
       // getRecords(p, n, this.formatDate(this.startDate), this.formatDate(this.endDate))
       getRecords(p, n, "2023-02-09 03:22:49", "2023-03-09 03:22:49")
   }
@@ -336,7 +336,7 @@ function OrderStatus() {
               //   </>
               // }
             >
-              <div className="table-responsive">
+              <div className="table-responsive1">
                 <Table
                   columns={columns}
                   dataSource={records}

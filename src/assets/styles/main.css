@@ -1120,6 +1120,9 @@ span.blue {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
+.ant-table {
+  overflow-x: auto;
+}
 .py-1 {
   padding-top: 0.25rem !important;
   padding-bottom: 0.25rem !important;
