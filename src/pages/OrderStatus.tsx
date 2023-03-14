@@ -271,7 +271,7 @@ function OrderStatus() {
             <Space size="middle" direction="horizontal">
               <label>From Date</label>
               <DatePicker 
-                  // defaultValue={(new Date(new Date().setMonth(new Date().getMonth() - 1))}
+                  defaultValue={moment(new Date(new Date().setMonth(new Date().getMonth() - 1)))}
                   allowClear={false} 
                   onChange={fromDateChangeHandler} />
               <label>To Date</label>

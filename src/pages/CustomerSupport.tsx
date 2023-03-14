@@ -223,7 +223,7 @@ function CustomerSupport() {
               <label>From Date</label>
 
               <DatePicker 
-                  // defaultValue={(new Date(new Date().setMonth(new Date().getMonth() - 1))}
+                  defaultValue={moment(new Date(new Date().setMonth(new Date().getMonth() - 1)))}
                   allowClear={false} 
                   onChange={fromDateChangeHandler} />
 
