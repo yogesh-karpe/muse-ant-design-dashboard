@@ -15,26 +15,20 @@ import { useState, useEffect } from "react";
 import {
   Row,
   Col,
-  Breadcrumb,
-  Badge,
-  Dropdown,
   Button,
-  List,
   Avatar,
-  Input,
   Drawer,
   Typography,
-  Switch,
 } from "antd";
 
-import {
-  SearchOutlined,
-  StarOutlined,
-  TwitterOutlined,
-  FacebookFilled,
-} from "@ant-design/icons";
+// import {
+//   SearchOutlined,
+//   StarOutlined,
+//   TwitterOutlined,
+//   FacebookFilled,
+// } from "@ant-design/icons";
 
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import avtar from "../../assets/images/team-2.jpg";
 
@@ -59,25 +53,25 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const bell = [
-  <svg
-    width="20"
-    height="20"
-    viewBox="0 0 20 20"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    key={0}
-  >
-    <path
-      d="M10 2C6.68632 2 4.00003 4.68629 4.00003 8V11.5858L3.29292 12.2929C3.00692 12.5789 2.92137 13.009 3.07615 13.3827C3.23093 13.7564 3.59557 14 4.00003 14H16C16.4045 14 16.7691 13.7564 16.9239 13.3827C17.0787 13.009 16.9931 12.5789 16.7071 12.2929L16 11.5858V8C16 4.68629 13.3137 2 10 2Z"
-      fill="#111827"
-    ></path>
-    <path
-      d="M10 18C8.34315 18 7 16.6569 7 15H13C13 16.6569 11.6569 18 10 18Z"
-      fill="#111827"
-    ></path>
-  </svg>,
-];
+// const bell = [
+//   <svg
+//     width="20"
+//     height="20"
+//     viewBox="0 0 20 20"
+//     fill="none"
+//     xmlns="http://www.w3.org/2000/svg"
+//     key={0}
+//   >
+//     <path
+//       d="M10 2C6.68632 2 4.00003 4.68629 4.00003 8V11.5858L3.29292 12.2929C3.00692 12.5789 2.92137 13.009 3.07615 13.3827C3.23093 13.7564 3.59557 14 4.00003 14H16C16.4045 14 16.7691 13.7564 16.9239 13.3827C17.0787 13.009 16.9931 12.5789 16.7071 12.2929L16 11.5858V8C16 4.68629 13.3137 2 10 2Z"
+//       fill="#111827"
+//     ></path>
+//     <path
+//       d="M10 18C8.34315 18 7 16.6569 7 15H13C13 16.6569 11.6569 18 10 18Z"
+//       fill="#111827"
+//     ></path>
+//   </svg>,
+// ];
 
 const wifi = [
   <svg
@@ -165,23 +159,6 @@ const data = [
   },
 ];
 
-const menu = (
-  <List
-    min-width="100%"
-    className="header-notifications-dropdown "
-    itemLayout="horizontal"
-    dataSource={data}
-    renderItem={(item) => (
-      <List.Item>
-        <List.Item.Meta
-          avatar={<Avatar shape="square" src={item.avatar} />}
-          title={item.title}
-          description={item.description}
-        />
-      </List.Item>
-    )}
-  />
-);
 
 const logsetting = [
   <svg

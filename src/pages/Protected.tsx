@@ -1,6 +1,6 @@
 import { Link, useHistory } from "react-router-dom";
 import { useEffect } from "react"
-function Protected(props){
+function Protected(props: any){
     const {Component} = props;
     const history = useHistory();
     useEffect(()=>{

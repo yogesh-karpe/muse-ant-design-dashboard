@@ -13,7 +13,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import OrderStatus from "./pages/OrderStatus";
 import CustomerSupport from "./pages/CustomerSupport";
-import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Main from "./components/layout/Main";
 import "antd/dist/antd.css";

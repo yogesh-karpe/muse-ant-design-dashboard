@@ -13,13 +13,8 @@ import {
   Row,
   Col,
   Card,
-  Radio,
   Table,
-  Upload,
-  message,
-  Progress,
   Button,
-  Avatar,
   Typography,
   DatePickerProps,
   Space,
@@ -28,11 +23,9 @@ import {
 
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { ToTopOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 import moment from "moment";
 
-const { Title } = Typography;
+// const { Title } = Typography;
 
 // table code start
 const columns = [
@@ -105,7 +98,7 @@ function CustomerSupport() {
   let [count, setCount] = useState(0);
   let [tablePagination, setTablePagination] = useState({ total: 10 });
   let [pagination, setPagination] = useState({ current: 1, pageSize: 10 });
-  let [startDate, setStartDate] = useState<Date>();
+  let [startDate, setStartDate] = useState<Date>(new Date(new Date().setMonth(new Date().getMonth() - 1)));
   let [endDate, setEndDate] = useState<Date>(new Date());
 
 
@@ -184,7 +177,7 @@ function CustomerSupport() {
     const headers = {
       'Content-Type': 'application/json'
     }
-    axios.post(`http://localhost:5003/api/getOrderStatusCSV`, requestBody, { headers: headers, data: requestBody }).then((res) => {
+    axios.post(`http://localhost:5003/api/getCustomerSupportCSV`, requestBody, { headers: headers, data: requestBody }).then((res) => {
       // console.log("res", res);
       downloadCSVFile(res.data);
     })
@@ -197,7 +190,7 @@ function CustomerSupport() {
     var temp_link = document.createElement('a');
 
     // Download csv file
-    temp_link.download = "Order_Status.csv";
+    temp_link.download = "Customer_Support.csv";
     var url = window.URL.createObjectURL(CSVFile);
     temp_link.href = url;
 
@@ -218,6 +211,7 @@ function CustomerSupport() {
               className="criclebox tablespace mb-24"
             // title="Authors Table"
             >
+              <div style={{marginLeft: "26px"}}>
               <Space size="middle" direction="horizontal">
 
               <label>From Date</label>
@@ -234,10 +228,11 @@ function CustomerSupport() {
                   allowClear={false} 
                   onChange={toDateChangeHandler}/>  
               <div>
-                  <Button type="primary" onClick={e => { e.stopPropagation(); onSubmit(1, 10)}}>Submit</Button>
+                  <Button type="primary" onClick={e => { e.stopPropagation(); onSubmit(pagination.current, pagination.pageSize)}}>Submit</Button>
               </div> 
                   <Button onClick={e => { e.stopPropagation(); getCSVFile()}}>Download CSV</Button> 
-            </Space> <br/><br/>
+            </Space> 
+            </div><br/><br/>
 
 
             <div className="table-responsive">

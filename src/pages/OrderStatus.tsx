@@ -13,26 +13,17 @@ import {
   Row,
   Col,
   Card,
-  Radio,
   Table,
-  Upload,
-  message,
-  Progress,
   Button,
-  Avatar,
   Typography,
   DatePicker,
   Space,
-  Tag
 } from "antd";
 
 import type { DatePickerProps } from 'antd';
 
 import React, {useState, useEffect } from "react";
-import type { ColumnsType } from 'antd/es/table';
 import axios from 'axios'; 
-import { ToTopOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 import moment from "moment";
 
 const { Title } = Typography;
@@ -144,7 +135,7 @@ function OrderStatus() {
   let [count, setCount]=useState();
   let [tablePagination, setTablePagination]=useState({total: 10});
   let [pagination, setPagination] = useState({current: 1,pageSize: 10});
-  let [startDate, setStartDate] = useState<Date>();
+  let [startDate, setStartDate] = useState<Date>(new Date(new Date().setMonth(new Date().getMonth() - 1)));
   let [endDate, setEndDate] = useState<Date>(new Date());
 
   const pageChangeHandler = (pagination: any) => {
@@ -267,7 +258,7 @@ function OrderStatus() {
               //   </>
               // }
             >
-
+            <div style={{marginLeft: "26px"}}>
             <Space size="middle" direction="horizontal">
               <label>From Date</label>
               <DatePicker 
@@ -280,11 +271,12 @@ function OrderStatus() {
                   allowClear={false} 
                   onChange={toDateChangeHandler}/>  
               <div>
-                  <Button type="primary" onClick={e => { e.stopPropagation(); onSubmit(1, 10)}}>Submit</Button>
+                  <Button type="primary" onClick={e => { e.stopPropagation(); onSubmit(pagination.current, pagination.pageSize)}}>Submit</Button>
               </div> 
 
                   <Button onClick={e => { e.stopPropagation(); getCSVFile()}}>Download CSV</Button> 
-            </Space>  <br/><br/>
+            </Space>  
+            </div><br/><br/>
 
               <div className="table-responsive">
                 <Table

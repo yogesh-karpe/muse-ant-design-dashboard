@@ -9,7 +9,7 @@
 =========================================================
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { Link, useHistory  } from "react-router-dom";
 import axios from 'axios'; 
 import {
@@ -21,7 +21,6 @@ import {
   Typography,
   Form,
   Input,
-  Switch,
 } from "antd";
 import signinbg from "../assets/images/shipyaari-logo.png";
 // import {
@@ -35,7 +34,7 @@ import signinbg from "../assets/images/shipyaari-logo.png";
 //   console.log(`switch to ${checked}`);
 // }
 const { Title } = Typography;
-const { Header, Footer, Content } = Layout;
+const { Header, Content } = Layout;
 // const template = [
 //   <svg
 //     data-v-4ebdc598=""
