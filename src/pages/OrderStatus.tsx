@@ -63,8 +63,8 @@ const columns = [
   },
   {
     title: "Logistics Seller NP Order Id",
-    key: "",
-    dataIndex: "",
+    key: "ondc_order_id",
+    dataIndex: "ondc_order_id",
   },
   {
     title: "Order Status",
@@ -72,9 +72,14 @@ const columns = [
     dataIndex: "ondc_order_state",
   },
   {
+		title: 'Order Category',
+		dataIndex: 'product_category',
+		scopedSlots: { customRender: 'product_category' },
+	},
+  {
     title: "Name of Seller",
-    key: "provider_name",
-    dataIndex: "provider_name",
+    key: "billing_name",
+    dataIndex: "billing_name",
   },
   {
     title: "Order Pickup Date & Time",
