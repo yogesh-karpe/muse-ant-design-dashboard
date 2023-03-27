@@ -133,7 +133,6 @@ function Dashboard() {
     {
       today: "Customer Issues",
       title: customerIssuesCount,
-      persent: "10%",
       icon: editIcon,
     },
   ];
@@ -214,7 +213,8 @@ function Dashboard() {
                     <Col xs={18}>
                       <span>{c.today}</span>
                       <Title level={3}>
-                        {c.title} <small>{c.persent}</small>
+                        {c.title} 
+                        {/* <small>{c.persent}</small> */}
                         {/* className={c.bnb} */}
                       </Title>
                     </Col>
@@ -228,7 +228,7 @@ function Dashboard() {
           ))}
         </Row>
 
-        <Row gutter={[24, 0]}>
+        {/* <Row gutter={[24, 0]}>
           <Col xs={24} sm={24} md={12} lg={12} xl={10} className="mb-24">
             <Card bordered={false} className="criclebox h-full">
               <Echart />
@@ -239,7 +239,7 @@ function Dashboard() {
               <LineChart />
             </Card>
           </Col>
-        </Row>
+        </Row> */}
 
         {/* <Row gutter={[24, 0]}>
           <Col xs={24} sm={24} md={12} lg={12} xl={16} className="mb-24">
